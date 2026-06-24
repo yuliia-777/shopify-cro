@@ -3,12 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y5Z5LJB7PM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y5Z5LJB7PM');
+</script>
 <title>Free Conversion Rate Optimization for Shopify - Pay Only After Sales Increase</title>
 <meta name="description" content="Free Conversion Rate Optimization for your Shopify store. I fix what's costing you sales at the theme level, and you pay only after your sales increase. No retainer, no flat fee.">
 
+<link rel="canonical" href="https://yuliia-777.github.io/shopify-cro/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yuliia-777.github.io/shopify-cro/">
+<meta property="og:title" content="Free Conversion Rate Optimization for Shopify - Pay Only After Sales Increase">
+<meta property="og:description" content="Free Conversion Rate Optimization for your Shopify store. I fix what's costing you sales at the theme level, and you pay only after your sales increase. No retainer, no flat fee.">
+<meta property="og:image" content="https://yuliia-777.github.io/shopify-cro/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Conversion Rate Optimization for Shopify - Pay Only After Sales Increase">
+<meta name="twitter:description" content="Free Conversion Rate Optimization for your Shopify store. I fix what's costing you sales at the theme level, and you pay only after your sales increase. No retainer, no flat fee.">
+<meta name="twitter:image" content="https://yuliia-777.github.io/shopify-cro/og-image.jpg">
+
+<link rel="icon" href="favicon.png" type="image/png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 <style>
   /* ---------- Design tokens ---------- */
@@ -62,12 +91,12 @@
     margin:0;
     background: var(--bg);
     color: var(--text-soft);
-    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-family: cursive, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 
   h1,h2,h3{
-    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-family: "Elms Sans", system-ui, sans-serif;
     font-weight: 600;
     margin: 0;
     letter-spacing: -0.01em;
@@ -80,7 +109,7 @@
   button{ font-family: inherit; }
 
   .mono{
-    font-family: "IBM Plex Mono", monospace;
+    font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
@@ -93,12 +122,14 @@
     align-items:center;
     gap:8px;
   }
-  .eyebrow::before{
+  .eyebrow::before,
+  .eyebrow::after{
     content:"";
     width:6px; height:6px;
     background: var(--accent);
     border-radius:50%;
     display:inline-block;
+    flex-shrink:0;
   }
 
   .container{
@@ -143,19 +174,21 @@
   /* ---------- Inline store-bag badge ---------- */
   .bag-badge{
     display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    width: 0.95em;
-    height: 0.95em;
-    border-radius: 0.26em;
-    background: var(--text);
-    vertical-align: -0.12em;
+    width: 48px;
+    height: 48px;
     margin: 0 0.02em;
+    vertical-align: sub;
   }
-  .bag-badge svg{
-    width: 58%;
-    height: 58%;
-    color: var(--paper);
+  @media (max-width: 480px){
+    .bag-badge{
+      width: 32px;
+      height: 32px;
+    }
+  }
+  .bag-badge img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   /* ---------- Strong underline (for "Free") ---------- */
@@ -182,7 +215,7 @@
     justify-content: space-between;
   }
   .nav-logo{
-    font-family:"Space Grotesk", sans-serif;
+    font-family:"Elms Sans", sans-serif;
     font-weight:700;
     font-size: 16px;
   }
@@ -205,13 +238,39 @@
     font-weight: 600;
     cursor:pointer;
     border: none;
-    transition: transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition: border-color .25s var(--ease);
   }
-  .btn-primary{ background: var(--btn); color: var(--paper); }
-  .btn-primary:hover{ background: var(--btn-hover); transform: translateY(-2px); }
+  /* ---------- Fill-wipe hover (slides in from the left) ---------- */
+  .btn::before,
+  .btn::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+  }
+  .btn-primary{ background: transparent; color: var(--paper); }
+  .btn-primary::after{ z-index:-2; background: var(--btn); opacity:.85; }
+  .btn-primary::before{
+    z-index:-1;
+    background: var(--btn-hover);
+    transform: translate3d(-100%,0,0);
+    transition: transform .4s var(--ease);
+  }
+  .btn-primary:hover::before{ transform: translate3d(0,0,0); }
+
   .btn-ghost{ background: transparent; color: var(--text); border: 1px solid var(--text-soft); }
-  .btn-ghost:hover{ border-color: var(--text); background: var(--line-soft); transform: translateY(-2px); }
-  .nav .btn{ padding: 10px 18px; font-size: 13px; }
+  .btn-ghost::before{
+    z-index:-1;
+    background: var(--accent-soft-bg);
+    transform: translate3d(-100%,0,0);
+    transition: transform .4s var(--ease);
+  }
+  .btn-ghost:hover{ border-color: var(--text); }
+  .btn-ghost:hover::before{ transform: translate3d(0,0,0); }
+  .nav .btn{ padding: 10px 18px; font-size: 13px; white-space: nowrap; }
 
   @media (max-width: 760px){
     .nav-links{ display:none; }
@@ -226,7 +285,7 @@
     align-items: center;
   }
   .hero h1{
-    font-size: clamp(34px, 4.6vw, 56px);
+    font-size: clamp(34px, 4.6vw, 46px);
     line-height: 1.08;
     margin-bottom: 22px;
   }
@@ -242,7 +301,8 @@
     flex-wrap: wrap;
     align-items:center;
     gap: 16px;
-    margin-bottom: 14px;
+    margin-top: 24px;
+    margin-bottom: 24px;
   }
   .hero-fine{
     font-size: 13px;
@@ -252,6 +312,19 @@
 
   @media (max-width: 900px){
     .hero-grid{ grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px){
+    .hero h1{
+      font-size: clamp(24px, 7vw, 34px);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+    .hero p.lede{
+      font-size: 15px;
+      max-width: 100%;
+    }
   }
 
   /* ---------- Audit card (signature element) ---------- */
@@ -274,7 +347,6 @@
   .audit-dots{ display:flex; gap:6px; }
   .audit-dots span{ width:8px; height:8px; border-radius:50%; background: var(--line-soft); display:block; }
   .audit-tag{
-    font-family:"IBM Plex Mono", monospace;
     font-size: 10.5px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -299,7 +371,6 @@
   .ln.w70{ width:70%; } .ln.w40{ width:40%; height:13px; } .ln.w55{ width:55%; }
   .audit-cta-row{ display:flex; align-items:center; gap:10px; margin-top:6px; }
   .audit-fake-btn{
-    font-family:"IBM Plex Mono", monospace;
     font-size: 11px;
     color: var(--text-faint);
     background: var(--muted-bg);
@@ -308,7 +379,6 @@
     padding: 7px 12px;
   }
   .leak-pill{
-    font-family:"IBM Plex Mono", monospace;
     font-size: 11px;
     color: var(--accent);
     border: 1px solid var(--accent-soft-border);
@@ -340,7 +410,6 @@
   }
   .audit-caption{
     margin-top: 14px;
-    font-family:"IBM Plex Mono", monospace;
     font-size: 11px;
     color: var(--text-faint);
     text-align:center;
@@ -364,11 +433,15 @@
     font-size: 19px;
     line-height: 1.65;
     color: var(--text-strong);
-    max-width: 680px;
+    max-width: 725px;
+  }
+  @media (max-width: 560px){
+    .about-intro p.about-text{
+      font-size: 16px;
+    }
   }
   .trusted{ width:100%; text-align:center; }
   .trusted-label{
-    font-family:"IBM Plex Mono", monospace;
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -400,7 +473,7 @@
   }
   .logo-box:hover img{ filter:none; opacity:1; }
   .logo-box .logo-text{
-    font-family:"Space Grotesk", sans-serif;
+    font-family:"Elms Sans", sans-serif;
     font-weight: 600;
     font-size: 15px;
     color: var(--text-soft);
@@ -421,8 +494,91 @@
     .logo-grid{ grid-template-columns: repeat(2, 1fr); }
   }
 
+  /* ---------- Hook (collapsible insight) ---------- */
+  .section.hook{
+    padding: clamp(32px, 5vw, 56px) 0;
+  }
+  .hook{
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 28px;
+    margin: 0 16px clamp(32px, 5vw, 64px);
+  }
+  .hook .container{ max-width: var(--max-w); }
+  .hook-q{
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 18px 0;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    gap: 24px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .hook-q-text{ display:flex; flex-direction:column; gap:10px; }
+  .hook-q-text .eyebrow{ margin-bottom:0; }
+  .hook-title{
+    font-size: clamp(19px, 2.3vw, 27px);
+    font-weight: 600;
+    line-height: 1.32;
+    color: var(--text);
+  }
+  .hook-q .plus{ flex: 0 0 26px; height:26px; position:relative; color: var(--accent); }
+  .hook-q .plus::before, .hook-q .plus::after{
+    content:"";
+    position:absolute;
+    background: currentColor;
+    top:50%; left:50%;
+    transform: translate(-50%,-50%);
+  }
+  .hook-q .plus::before{ width:16px; height:2px; }
+  .hook-q .plus::after{ width:2px; height:16px; transition: transform .3s var(--ease); }
+  .hook-card.open .plus::after{ transform: translate(-50%,-50%) rotate(90deg); }
+
+  .hook-a{
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .4s var(--ease);
+  }
+  .hook-a-inner{ padding: 0 0 32px; max-width: 700px; }
+  .hook-a-inner p{
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-soft);
+    margin-bottom: 16px;
+  }
+  .hook-a-inner p:last-child{ margin-bottom:0; }
+  .hook-a-inner strong{ color: var(--text); }
+  .hook-list{
+    margin: 4px 0 18px;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+  }
+  .hook-list li{
+    font-size: 15px;
+    line-height:1.6;
+    color: var(--text-strong);
+    padding-left: 22px;
+    position:relative;
+  }
+  .hook-list li::before{
+    content:"";
+    position:absolute;
+    left:0; top:9px;
+    width:6px; height:6px;
+    border-radius:50%;
+    background: var(--accent);
+  }
+  @media (max-width: 560px){
+    .hook-card{ padding: 0 18px; }
+  }
+
   /* ---------- Offer ---------- */
-  .offer{ background: var(--card-bg); color: var(--text); border: 1px solid var(--card-border); border-radius: 28px; margin: 0 16px; }
+  .offer{ background: var(--card-bg); color: var(--text); border: 1px solid var(--card-border); border-radius: 28px; margin: 0 16px clamp(32px, 5vw, 64px); }
   .offer .container{ max-width: var(--max-w); }
   .offer h2{
     font-size: clamp(28px, 3.4vw, 42px);
@@ -442,7 +598,6 @@
     display:inline-flex;
     align-items:center;
     gap: 9px;
-    font-family:"IBM Plex Mono", monospace;
     font-size: 12px;
     color: var(--text);
     background: var(--paper);
@@ -493,7 +648,7 @@
   }
   .step-icon svg{ width: 20px; height: 20px; }
   .step-num{
-    font-family:"Space Grotesk", sans-serif;
+    font-family:"Elms Sans", sans-serif;
     font-size: 34px;
     font-weight: 700;
     color: var(--line-dark);
@@ -546,7 +701,7 @@
   .qualify-grid{
     display:grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 22px 32px;
+    gap: 14px 16px;
   }
   .qualify-item{
     display:flex;
@@ -554,6 +709,10 @@
     gap: 14px;
     font-size: 15.5px;
     color: var(--text-strong);
+    border: 1px solid var(--accent-soft-border);
+    background: var(--accent-soft-bg);
+    border-radius: 14px;
+    padding: 14px 18px;
   }
   .qualify-item--wide{ grid-column: 1 / -1; }
   .check-icon{
@@ -564,7 +723,7 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    background: var(--accent-soft-bg);
+    background: var(--paper);
     border: 1px solid var(--accent-soft-border);
     color: var(--accent);
   }
@@ -576,7 +735,7 @@
   .faq h2{
     font-size: clamp(26px, 3vw, 36px);
     margin-bottom: 40px;
-    max-width: 560px;
+    max-width: 660px;
   }
   .faq-list{ border-top: 1px solid var(--line-dark); }
   .faq-item{ border-bottom: 1px solid var(--line-dark); }
@@ -592,7 +751,7 @@
     align-items:center;
     gap: 20px;
     font-size: 16px;
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Elms Sans", sans-serif;
     font-weight: 500;
     cursor: pointer;
   }
@@ -628,11 +787,11 @@
 
   /* ---------- CTA ---------- */
   .cta{
-    background: var(--card-bg);
+    background: var(--muted-bg);
     border-radius: 28px;
-    margin: 0 16px;
+    margin: 0 16px clamp(32px, 5vw, 64px);
     text-align: center;
-    border: 1px solid var(--card-border);
+    border: 1px solid var(--pulse-strong);
   }
   .cta h2{
     font-size: clamp(28px, 4vw, 48px);
@@ -643,7 +802,7 @@
   .cta p.lede{
     color: var(--text-soft);
     font-size: 16px;
-    max-width: 460px;
+    max-width: 480px;
     margin: 0 auto 32px;
   }
   .cta-actions{
@@ -666,18 +825,16 @@
     gap: 7px;
   }
   .form-field span{
-    font-family:"IBM Plex Mono", monospace;
     font-size: 11px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--text-faint);
   }
   .form-field input{
     background: var(--paper);
     border: 1px solid var(--line-dark);
     border-radius: 10px;
     padding: 13px 14px;
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Elms Sans", sans-serif;
     font-size: 14.5px;
     color: var(--text);
   }
@@ -685,6 +842,34 @@
   .form-field input:focus{
     outline: none;
     border-color: var(--accent);
+  }
+  .form-row{
+    display:flex;
+    gap: 14px;
+  }
+  .form-row .form-field{ flex: 1; min-width: 0; }
+  .form-field select{
+    background: var(--paper);
+    border: 1px solid var(--line-dark);
+    border-radius: 10px;
+    padding: 13px 36px 13px 14px;
+    font-family: "Elms Sans", sans-serif;
+    font-size: 14.5px;
+    color: var(--text);
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23062601' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    cursor: pointer;
+  }
+  .form-field select:invalid{ color: var(--text-faint); }
+  .form-field select:focus{
+    outline: none;
+    border-color: var(--accent);
+  }
+  @media (max-width: 480px){
+    .form-row{ flex-direction: column; }
   }
   .form-submit{
     margin-top: 4px;
@@ -703,9 +888,74 @@
     gap: 20px;
   }
   .footer-left{ font-size: 13px; color: var(--text-faint); }
-  .footer-left strong{ color: var(--text); font-family:"Space Grotesk", sans-serif; }
+  .footer-left strong{ color: var(--text); font-family:"Elms Sans", sans-serif; }
   .footer-links{ display:flex; gap: 24px; font-size: 13px; color: var(--text-soft); }
+  .footer-links a { display: inline-block; padding: 3px; text-decoration: underline; text-decoration-color: var(--line-dark); text-decoration-thickness: 1px; }
   .footer-links a:hover{ color: var(--text); }
+  .footer-policies > * { display: inline-block; padding: 3px; white-space: nowrap; cursor: pointer; }
+
+  /* ---------- Policy / Terms modals ---------- */
+  .modal-overlay{
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(var(--deep-rgb), 0.45);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s var(--ease), visibility .3s var(--ease);
+  }
+  .modal-overlay.is-open{ opacity: 1; visibility: visible; }
+  .modal-box{
+    background: var(--paper);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    box-shadow: 0 30px 60px -20px var(--shadow);
+    width: 100%;
+    max-width: 640px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: clamp(24px, 4vw, 40px);
+    transform: translateY(14px) scale(.98);
+    transition: transform .3s var(--ease);
+  }
+  .modal-overlay.is-open .modal-box{ transform: none; }
+  .modal-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .modal-header h3{ font-size: 22px; }
+  .modal-close{
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--line-dark);
+    background: transparent;
+    color: var(--text-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color .2s, color .2s;
+  }
+  .modal-close:hover{ border-color: var(--text); color: var(--text); }
+  .modal-close svg{ width: 14px; height: 14px; }
+  .modal-body{ font-size: 14px; line-height: 1.7; color: var(--text-soft); }
+  .modal-body p{ margin-bottom: 14px; }
+  .modal-body p:last-child{ margin-bottom: 0; }
+  .modal-body h4{ font-size: 15px; margin: 20px 0 8px; }
+  .modal-body h4:first-child{ margin-top: 0; }
+  body.modal-locked{ overflow: hidden; }
 
   /* shared section helpers */
   .center{ text-align:center; }
@@ -716,12 +966,12 @@
   <!-- ============ NAV ============ -->
   <header class="nav">
     <div class="container">
-      <a href="#" class="nav-logo">YA <span>· Shopify CRO Studio</span></a>
+      <a href="#" class="nav-logo">YA <span>· Shopify CRO Offer</span></a>
       <nav class="nav-links">
         <a href="#offer">The offer</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a href="#cta" class="btn btn-primary">Start free</a>
+      <a href="#cta" class="btn btn-primary">Get my free CRO</a>
     </div>
   </header>
 
@@ -729,9 +979,12 @@
   <section class="hero">
     <div class="container hero-grid">
       <div class="reveal">
-        <p class="eyebrow mono">Shopify CRO Studio · 5 spots this round</p>
-        <h1><span class="underline-strong">Free</span> <span class="bag-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 13H5z"></path><path d="M9 10V6a3 3 0 0 1 6 0v4"></path></svg></span> <span class="mark">Conversion Rate Optimization</span> for your Shopify store.</h1>
-        <p class="lede">You pay only after your sales increase. I find what's costing you conversions, fix it at the theme level, and you owe nothing unless it actually moves the needle.</p>
+        <p class="eyebrow mono">Shopify CRO Offer · 5 spots this round</p>
+        <h1>I help Shopify stores
+        <span class="bag-badge">
+          <img src="shop-bag.webp" width="24" height="24" alt="Shop Bag">
+        </span>
+        increase their conversion rates in 3 weeks - if your sales don't go up, <span class="mark">you don't pay a cent.</span></h1>
         <div class="hero-ctas">
           <a href="#cta" class="btn btn-primary">Get my free CRO</a>
           <a href="#offer" class="btn btn-ghost">See how it works</a>
@@ -740,7 +993,8 @@
       </div>
 
       <div class="audit-wrap reveal">
-        <div class="audit-card">
+        <img src="same-traffic.png" width="100%" height="auto" alt="Sample audit card" style="border-radius: 12px; box-shadow: 0 30px 60px -20px rgba(0,0,0,0.15);">
+        <!-- <div class="audit-card">
           <div class="audit-bar">
             <span class="audit-dots"><span></span><span></span><span></span></span>
             <span class="audit-tag">Sample audit · illustrative</span>
@@ -763,8 +1017,8 @@
             <li>Checkout asks for 3 fields it doesn't need</li>
             <li>Shipping cost hidden until the final step</li>
           </ul>
-        </div>
-        <p class="audit-caption">This is the kind of breakdown you'll get - built for your real store, not a mockup</p>
+        </div> -->
+        <!-- <p class="audit-caption">This is the kind of breakdown you'll get - built for your real store, not a mockup</p> -->
       </div>
     </div>
   </section>
@@ -774,7 +1028,7 @@
     <div class="container about-stack">
       <div class="about-intro reveal">
         <p class="eyebrow mono" style="justify-content:center;">Who's behind this</p>
-        <p class="about-text">We're a lean Shopify studio - no account managers, no templated playbook passed between juniors. Six years of hands-on Liquid, theme builds, and checkout-level fixes, applied directly to your store by the person doing the work.</p>
+        <p class="about-text">I'm Yuliia - an independent Shopify developer and technical partner for DTC brands. Six years of hands-on Liquid, theme builds, and checkout-level fixes, applied directly to your store by the person doing the work.</p>
       </div>
       <div class="trusted reveal">
         <p class="trusted-label">Brands we've built and fixed for</p>
@@ -798,6 +1052,35 @@
     </div>
   </section>
 
+  <!-- ============ HOOK ============ -->
+  <section class="section hook">
+    <div class="container">
+      <div class="hook-card reveal">
+        <button class="hook-q" aria-expanded="false">
+          <span class="hook-q-text">
+            <span class="eyebrow mono">What is CRO</span>
+            <span class="hook-title">Stop leaving money on the table: the power of conversion rate optimization</span>
+          </span>
+          <span class="plus"></span>
+        </button>
+        <div class="hook-a">
+          <div class="hook-a-inner">
+            <p>Most Shopify stores today are converting at under 3%. If that sounds like your business, you are leaving thousands of dollars on the table every single month.</p>
+            <p>While most brands are obsessed with chasing new traffic, pumping money into ads, or jumping on the latest TikTok trend, they are missing the most important fact: if your site doesn't convert, you are simply pouring more water into a bucket filled with holes.</p>
+            <p>Traffic matters, but CRO (Conversion Rate Optimization) is your real growth lever. Look at the math:</p>
+            <ul class="hook-list">
+              <li>Imagine you have 10,000 visitors a month.</li>
+              <li>At a 2% conversion rate, you get 200 orders.</li>
+              <li>But if you lift that to 4%, you get 400 orders.</li>
+            </ul>
+            <p>That is <strong>double the sales from the exact same traffic</strong>, at no extra cost to your business. This is how a brand goes from $500,000 to $2 million a year - same traffic, same ad spend, just a site that actually converts.</p>
+            <p>Don't be like the 99% of brands that ignore CRO or waste time split-testing button colors. It's time to stop chasing visitors and start turning the ones you already have into loyal customers. That is the real power of conversion rate optimization.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ OFFER ============ -->
   <section class="section offer" id="offer">
     <div class="container">
@@ -816,7 +1099,7 @@
             <span class="step-num">01</span>
           </div>
           <h3>You apply</h3>
-          <p>Send your store through the form below.</p>
+          <p>Fill out the form below.</p>
         </div>
         <div class="step">
           <div class="step-head">
@@ -824,7 +1107,7 @@
             <span class="step-num">02</span>
           </div>
           <h3>We review it</h3>
-          <p>I check your store against the criteria and follow up with feedback. If it's a fit, you get one of the 5 free spots.</p>
+          <p>I check your store against the criteria and follow up with feedback. If it's a fit and you we`re fast, you get one of the 5 free spots.</p>
         </div>
         <div class="step">
           <div class="step-head">
@@ -832,7 +1115,7 @@
             <span class="step-num">03</span>
           </div>
           <h3>We sign the agreement</h3>
-          <p>Before any work starts, we sign a simple contract: 20% of the extra revenue from the conversion lift, for the first 3 months from publish. No surprises, no fine print.</p>
+          <p>Before any work starts, we sign a simple contract - no surprises, no fine print.</p>
         </div>
         <div class="step">
           <div class="step-head">
@@ -856,11 +1139,11 @@
             <span class="step-num">06</span>
           </div>
           <h3>You pay only the lift</h3>
-          <p>No improvement that month, no charge. For any of the first 3 months that shows a lift, you pay 20% of the extra revenue it creates (min. $500). Everything after month 3 is yours.</p>
+          <p>No improvement that month, no charge. For any of the first 3 months that shows a lift, you pay 20% of the extra revenue it creates (min. $199). Everything after month 3 is yours.</p>
         </div>
       </div>
 
-      <p class="offer-note reveal"><strong>Why only 5?</strong> Every audit and build is done by hand, by me - not a templated checklist. Five is what I can do properly at once this round.</p>
+      <p class="offer-note reveal">I take on <strong>only 5 clients</strong> at a time - so I can give each one the attention they need.</p>
     </div>
   </section>
 
@@ -878,17 +1161,13 @@
         </li>
         <li class="qualify-item">
           <span class="check-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-          <span>You're already profitable</span>
-        </li>
-        <li class="qualify-item">
-          <span class="check-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
           <span>You sell physical products</span>
         </li>
         <li class="qualify-item">
           <span class="check-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
           <span>You run paid ads on Google and/or Meta (Facebook/Instagram)</span>
         </li>
-        <li class="qualify-item qualify-item--wide">
+        <li class="qualify-item">
           <span class="check-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
           <span>You're making at least $5,000/month in profit</span>
         </li>
@@ -909,15 +1188,15 @@
         </div>
         <div class="faq-item">
           <button class="faq-q">How do you make money if the audit's free?<span class="plus"></span></button>
-          <div class="faq-a"><p>I take 20% of the extra revenue created by the conversion lift, billed monthly for the first 3 months from publish (minimum $500 for any month that shows a lift) - measured against your store's conversion rate before I touched it. No lift in a given month, no charge for that month. Everything beyond those 3 months is entirely yours.</p></div>
+          <div class="faq-a"><p>I take 20% of the extra revenue created by the conversion lift, billed monthly for the first 3 months from publish (minimum $199 for any month that shows a lift) - measured against your store's conversion rate before I touched it. No lift in a given month, no charge for that month. Everything beyond those 3 months is entirely yours.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q">Do I need to sign anything?<span class="plus"></span></button>
-          <div class="faq-a"><p>Yes - we sign a simple agreement before I start the build. It states the terms in plain numbers: 20% of the extra revenue from the conversion lift, billed monthly for the first 3 months from publish (min. $500/month if there's a lift), nothing for any month without one.</p></div>
+          <div class="faq-a"><p>Yes - we sign a simple agreement before I start the build. It states the terms in plain numbers: 20% of the extra revenue from the conversion lift, billed monthly for the first 3 months from publish (min. $199/month if there's a lift), nothing for any month without one.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q">What will you actually change?<span class="plus"></span></button>
-          <div class="faq-a"><p>Mostly your theme: product pages, cart, checkout flow, mobile experience - the things that quietly cost you sales. You'll see every change before it goes live.</p></div>
+          <div class="faq-a"><p>Mostly your theme: product pages, cart, checkout flow, mobile experience - the things that quietly cost you sales. This can include installing a handful of apps where that's faster and more reliable than custom code, and slight adjustments to your checkout. You'll see every change before it goes live.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q">Will this affect my live store while you're working?<span class="plus"></span></button>
@@ -929,7 +1208,7 @@
         </div>
         <div class="faq-item">
           <button class="faq-q">How do we measure the lift?<span class="plus"></span></button>
-          <div class="faq-a"><p>"Conversion rate" means your store's standard Shopify funnel: add-to-cart rate, rate of reaching the cart page, rate of reaching checkout, and rate of completing a purchase. I pull those four numbers myself from your Shopify Analytics, using my collaborator access - as your baseline before I start, then the same ones after publish. Which exact pages I optimize to move them is up to me - what we measure stays fixed.</p></div>
+          <div class="faq-a"><p>"Conversion rate" means the rate of completing checkout, from the Conversion Rate Breakdown report in your Shopify Analytics Dashboard. I pull that number myself, using my collaborator access - as your baseline before I start, then the same metric after publish. Which exact pages I optimize to move it is up to me - what we measure stays fixed.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q">What if you run a sale or change prices during those 3 months?<span class="plus"></span></button>
@@ -952,7 +1231,7 @@
     <div class="container">
       <p class="eyebrow mono center" style="justify-content:center;">Get started</p>
       <h2 class="reveal">5 spots. Free CRO. Pay only after sales increase.</h2>
-      <p class="lede reveal">Send me your store and I'll reply within a day with next steps.</p>
+      <p class="lede reveal">Fill out the form and I'll reply within a day with next steps.</p>
       <div class="cta-actions reveal">
         <!--
           Connected to Formspree (https://formspree.io/f/xrewgbpa).
@@ -970,12 +1249,37 @@
             <input type="email" name="email" placeholder="you@yourstore.com" required>
           </label>
           <label class="form-field">
-            <span>Your niche</span>
-            <input type="text" name="niche" placeholder="e.g. skincare, pet supplies, jewelry" required>
-          </label>
-          <label class="form-field">
             <span>Your Shopify store</span>
             <input type="url" name="store_url" placeholder="https://yourstore.com" required>
+          </label>
+          <div class="form-row">
+            <label class="form-field">
+              <span>Your role</span>
+              <select name="role" required>
+                <option value="" disabled selected hidden>Select</option>
+                <option value="owner">Owner / Founder</option>
+                <option value="ceo">CEO</option>
+                <option value="ecommerce-manager">Ecommerce Manager</option>
+                <option value="marketing-manager">Marketing Manager</option>
+                <option value="agency">Agency</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+            <label class="form-field">
+              <span>Monthly revenue</span>
+              <select name="monthly_revenue" required>
+                <option value="" disabled selected hidden>Select</option>
+                <option value="under-5k">Under $5k</option>
+                <option value="5k-10k">$5k - $10k</option>
+                <option value="10k-30k">$10k - $30k</option>
+                <option value="30k-100k">$30k - $100k</option>
+                <option value="100k-plus">$100k+</option>
+              </select>
+            </label>
+          </div>
+          <label class="form-field">
+            <span>Your niche</span>
+            <input type="text" name="niche" placeholder="e.g. skincare, pet supplies, jewelry" required>
           </label>
           <button type="submit" class="btn btn-primary form-submit">Request my free CRO</button>
         </form>
@@ -986,14 +1290,115 @@
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
     <div class="container">
-      <p class="footer-left"><strong>YA</strong> · Shopify CRO Studio - built and run by Yuliia Aleksiienko.</p>
+      <p class="footer-left"><strong>YA</strong> · Shopify CRO Offer - built and run by Yuliia Aleksiienko.</p>
       <div class="footer-links">
-        <a href="#offer">The offer</a>
+        <!-- <a href="#offer">The offer</a>
         <a href="#faq">FAQ</a>
-        <a href="#cta">Contact</a>
+        <a href="#cta">Contact</a> -->
+        <div class="footer-policies">
+          <a href="#" data-modal-open="privacy-modal">Privacy Policy</a>
+          <a href="#" data-modal-open="terms-modal">Terms of Service</a>
+        </div>
+        <a href="https://www.linkedin.com/in/yuliia-aleksiienko/" target="_blank" rel="noopener">Meet me on LinkedIn</a>
       </div>
     </div>
   </footer>
+
+  <!-- ============ POLICY / TERMS MODALS ============ -->
+  <!-- Replace the placeholder text inside each .modal-body with your actual content. -->
+  <div class="modal-overlay" id="privacy-modal" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="privacy-modal-title">
+      <div class="modal-header">
+        <h3 id="privacy-modal-title">Privacy Policy</h3>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- PRIVACY POLICY TEXT GOES HERE -->
+        <p>Last updated: 06/24/2026</p>
+        <p><strong>1. Introduction</strong></p>
+        <p>Shopify CRO Offer ("I", "we", "our", or "us") is operated by Yuliia Aleksiienko ("Provider"). We respect your privacy and are committed to protecting it through our compliance with this policy. This policy describes the types of information we may collect from you, or that you may provide, when you visit this website or engage our conversion optimization service, and how we collect, use, and protect that information.</p>
+        <p><strong>2. Information We Collect</strong></p>
+        <p>Contact Form Information: When you submit the form on this site, we collect your email address, Shopify store URL, role, monthly revenue range, and store niche.</p>
+        <p>Shopify Store Access: If you become a client, you add us as a collaborator on your Shopify store. We use this access to review your theme, implement and publish changes, and pull your "Completed checkout" conversion rate from the Conversion Rate Breakdown report in your Shopify Analytics Dashboard - before and after publish - to measure results under our agreement.</p>
+        <p>Usage Data: Details of your visits to this website, including pages viewed and general traffic data, collected through Google Analytics.</p>
+        <p><strong>3. How We Use Your Information</strong></p>
+        <p>We use the information we collect to:</p>
+        <p>Respond to your inquiry and decide whether your store is a fit for one of our limited spots.</p>
+        <p>Deliver the conversion optimization service: described in our agreement, including measuring your baseline and post-publish conversion rate.</p>
+        <p>Communicate with you: about the engagement, including approvals, progress, and payment.</p>
+        <p>Improve this website and the service we offer:</p>
+        <p><strong>4. Data Security</strong></p>
+        <p>We take reasonable measures to protect the information we collect from accidental loss and from unauthorized access, use, or disclosure. Shopify collaborator access is removed once an engagement ends, in line with the terms of our service agreement.</p>
+        <p><strong>5. Third-Party Services</strong></p>
+        <p>Our website and service rely on a small number of third-party platforms:</p>
+        <p>Shopify - for store access and analytics, if you become a client.</p>
+        <p>Formspree - to process and deliver contact form submissions.</p>
+        <p>Google Analytics - to understand website traffic.</p>
+        <p>We are not responsible for the privacy practices of these platforms and encourage you to review their own privacy policies.</p>
+        <p><strong>6. Data Retention</strong></p>
+        <p>We keep contact form submissions for as long as needed to follow up with you, or until you ask us to delete them. Shopify collaborator access and any related store data are handled according to the terms of our service agreement, including removal upon termination as described there.</p>
+        <p><strong>7. Your Rights</strong></p>
+        <p>You can ask us, at any time, to access, correct, or delete the personal information we hold about you by contacting us using the details below.</p>
+        <p><strong>8. Contact Information</strong></p>
+        <p>To ask questions about this privacy policy or our privacy practices, contact us at: yuliia.go.up@gmail.com</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="terms-modal" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="terms-modal-title">
+      <div class="modal-header">
+        <h3 id="terms-modal-title">Terms of Service</h3>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- TERMS OF SERVICE TEXT GOES HERE -->
+        <p>Last updated: 06/24/2026</p>
+        <p>These Terms summarize the Shopify CRO Offer described on this website.</p>
+        <p><strong>1. Scope of Work</strong></p>
+        <p>I review your Shopify store, identify what's costing you conversions, and implement changes - primarily within your theme.</p>
+        <p>I don't guarantee that any specific change will work. My only obligation, and your only remedy, are set out in Sections 6 and 7.</p>
+        <p><strong>2. Access</strong></p>
+        <p>You add me as a collaborator on your Shopify store, with the access needed to do the work.</p>
+        <p><strong>3. Method</strong></p>
+        <p>I duplicate your current theme before changing anything and record your baseline conversion rate.</p>
+        <p>All work happens on the duplicate. Your live store stays untouched until you approve.</p>
+        <p>I aim to have the build ready for your review within 3 weeks of getting access.</p>
+        <p><strong>4. What Is Measured</strong></p>
+        <p>"Conversion rate" means the rate of completing checkout (the "Completed checkout" metric), taken from the Conversion Rate Breakdown report in your Shopify Analytics Dashboard.</p>
+        <p>Which pages or elements I optimize is up to me. What we measure stays fixed.</p>
+        <p><strong>5. Publish &amp; Measurement Window</strong></p>
+        <p>Once you approve the changes, I publish them to your live store. A 3-month measurement window starts from that publish date.</p>
+        <p><strong>6. Payment &amp; Ownership</strong></p>
+        <p>For any of those 3 months where your conversion rate improves over baseline, you pay 20% of the extra revenue that month.</p>
+        <p>Minimum payment per qualifying month: $199, plus $100 for each full percentage point of increase ($199 + $100 x n).</p>
+        <p>Payment is due within 14 days of the end of each month that shows a lift.</p>
+        <p>Code ownership transfers to you in full once all amounts due under this section are paid.</p>
+        <p><strong>7. No Improvement</strong></p>
+        <p>If none of the 3 months show an improvement, you owe nothing for this engagement, and I'll restore your original theme on request.</p>
+        <p><strong>8. Material Changes During Measurement</strong></p>
+        <p>A sale, a price change, or another material change during the measurement window doesn't break the deal - we just agree in good faith on a fair way to account for it.</p>
+        <p><strong>9. Approval</strong></p>
+        <p>Nothing goes live without your sign-off.</p>
+        <p>You have 3 business days to approve or request changes to the duplicate. No response in that time and I treat it as approved.</p>
+        <p><strong>10. Confidentiality</strong></p>
+        <p>We both keep each other's business and store data confidential, except where required to do the work or required by law.</p>
+        <p><strong>11. Term &amp; Termination</strong></p>
+        <p>Either of us can walk away before anything is published to the live store, with nothing owed either way.</p>
+        <p>If you're unresponsive for 14 days or more, I can treat the engagement as abandoned, remove my code, and keep it. You owe nothing further, and I owe no further work.</p>
+        <p><strong>12. Limitation of Liability</strong></p>
+        <p>My total liability is limited to the fees you've actually paid me under Section 6. Neither of us is liable for indirect, incidental, or consequential damages.</p>
+        <p><strong>13. Changes to These Terms</strong></p>
+        <p>I may update this page from time to time. For an active engagement, the terms that apply are the ones in the agreement we signed.</p>
+        <p><strong>14. Contact Information</strong></p>
+        <p>Questions about these terms? Contact us at: yuliia.go.up@gmail.com</p>
+      </div>
+    </div>
+  </div>
 
 <script>
   // Reveal-on-scroll for elements marked .reveal
@@ -1035,6 +1440,60 @@
         a.style.maxHeight = a.scrollHeight + 'px';
       }
     });
+  });
+
+  // Hook accordion (single collapsible item)
+  document.querySelectorAll('.hook-card').forEach((card) => {
+    const q = card.querySelector('.hook-q');
+    const a = card.querySelector('.hook-a');
+    q.addEventListener('click', () => {
+      const isOpen = card.classList.contains('open');
+      if (isOpen) {
+        card.classList.remove('open');
+        a.style.maxHeight = null;
+        q.setAttribute('aria-expanded', 'false');
+      } else {
+        card.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+        q.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // ---------- Policy / Terms modals ----------
+  function openModal(modal){
+    if (!modal) return;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-locked');
+  }
+  function closeModal(modal){
+    if (!modal) return;
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-locked');
+  }
+
+  document.querySelectorAll('[data-modal-open]').forEach((trigger) => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal(document.getElementById(trigger.dataset.modalOpen));
+    });
+  });
+
+  document.querySelectorAll('.modal-overlay').forEach((overlay) => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeModal(overlay);
+    });
+    overlay.querySelectorAll('[data-modal-close]').forEach((btn) => {
+      btn.addEventListener('click', () => closeModal(overlay));
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.is-open').forEach(closeModal);
+    }
   });
 </script>
 
